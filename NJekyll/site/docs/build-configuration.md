@@ -404,6 +404,24 @@ The matrix is already optimized for fast failing. The logic is as follows:
 
 See [complete appveyor.yml reference](/docs/appveyor-yml) for full syntax.
 
+### Building only selected targets
+
+To build only individual platform/configuration combinations, add an `environment.matrix` section, listing the individual combinations to build, _instead_ of specifying global `platform` and `configuration` sections:
+
+    environment:
+      matrix:
+        - platform: <value>
+          configuration: <value>
+
+The following example causes `platform=x86, configuration=Debug` and `platform=x64, configuration=Release` to be built:
+
+    environment:
+      matrix:
+        - platform: x86
+          configuration: Debug
+        - platform: x64
+          configuration: Release
+
 ## Rolling builds
 
 "Rolling builds" are great for very active OSS projects with lengthy queue. Whenever you do a new commit to the same branch *OR* pull request all current queued/running builds for that branch or PR are cancelled and the new one is queued. Other words, rolling builds make sure that only the most recent commit is built.
